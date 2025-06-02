@@ -1,0 +1,31 @@
+import numpy as np
+
+def euclidean_dist(a,b):
+    a = np.array(a)
+    b = np.array(b)
+    return np.linalg.norm(a - b)
+
+def manhattan_dist(a, b):
+    a = np.array(a)
+    b = np.array(b)
+    return np.sum(np.abs(a - b))
+
+def cosine_dist_angle (a,b):
+    a = np.array(a)
+    b = np.array(b)
+    dot_prod = np.dot(a, b)
+    norm1 = np.linalg.norm(a)
+    norm2 = np.linalg.norm(b)
+    if norm1 == 0 or norm2 == 0:
+     print("One of the vectors is zero; cosine distance is not defined; Angle between them is not defined.")
+    else:
+     cosine_sim = dot_prod / (norm1 * norm2)
+     cosine_sim = np.clip(cosine_sim, -1.0, 1.0)
+     angle = np.arccos(cosine_sim)
+     return 1 - cosine_sim , angle
+
+a = [1, 2, 0]
+b = [4, 8, 6]
+print("Euclidean Distance:", euclidean_dist(a,b))
+print("Manhattan Distance:", manhattan_dist(a,b))
+print("Cosine Distance & Angle between vectors :", cosine_dist_angle(a,b))
